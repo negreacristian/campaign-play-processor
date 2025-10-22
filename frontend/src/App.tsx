@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { fetchCampaigns } from './api/api';
 import { Campaign } from './types/campaign';
-
+import { simulateEvent } from './api/simulate';
 
 // main component
 const App = () => {
@@ -27,7 +27,10 @@ const App = () => {
 
   // return html
   return (
+
     <div>
+      <button onClick={simulateEvent}>Simulate Event</button>
+
       <h2>Campaign Stats</h2>
       <ul>
         {campaigns.map(c => (
@@ -37,6 +40,7 @@ const App = () => {
         ))}
       </ul>
     </div>
+   
   );
 };
 
