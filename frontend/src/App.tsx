@@ -1,47 +1,31 @@
-import React, { useEffect, useState } from 'react';
-import { fetchCampaigns } from './api/api';
-import { Campaign } from './types/campaign';
-import { simulateEvent } from './api/simulate';
+import React from 'react';
+import { Navigate, Route, Routes,} from 'react-router-dom';
+import { Box, Container } from '@mui/material';
 
-// main component
-const App = () => {
+import NavigationBar from './pages/components/navigationBar'; 
+import CampaignsPage from './pages/campaignsPage';
+import ScreensPage from './pages/screensPage';
 
-  // storage for campaigns
-  const [campaigns, setCampaigns] = useState<Campaign[]>([]);
+const App = () => (
+  <Box
+    sx={{
+      minHeight: '100vh',
+      backgroundColor: (theme) => theme.palette.background.default,
+    }}
+  >
+    <NavigationBar />
 
-  // set loading true 
-  const [loading, setLoading] = useState(true);
-
-  // start fetch 
-  useEffect(() => {
-    fetchCampaigns()
-      // save result and show errors
-      .then(setCampaigns)
-      .catch(console.error)
-      .finally(() => setLoading(false)); // stop loading
-  }, []);
-
-
-  if (loading) return <p>Loading...</p>;
-  if (campaigns.length === 0) return <p>No campaigns found.</p>;
-
-  // return html
-  return (
-
-    <div>
-      <button onClick={simulateEvent}>Simulate Event</button>
-
-      <h2>Campaign Stats</h2>
-      <ul>
-        {campaigns.map(c => (
-          <li key={c._id}>
-            {c.campaign_id} – {c.screen_id} – {c.total_plays} plays
-          </li>
-        ))}
-      </ul>
-    </div>
-   
-  );
-};
+    {/* page content */}
+    
+    <Container maxWidth="md" sx={{ py: 4 }}>
+      <Routes>
+        <Route path="/" element={<Navigate to="/campaigns" replace />} />
+        <Route path="/campaigns" element={<CampaignsPage />} />
+        <Route path="/screens" element={<ScreensPage />} />
+        <Route path="*" element={<Navigate to="/campaigns" replace />} />
+      </Routes>
+    </Container>
+  </Box>
+);
 
 export default App;
