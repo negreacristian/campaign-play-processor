@@ -7,7 +7,7 @@ const router = Router();
 
 // POST /events - add event into Redis queue using async
 
-router.post('/', async (req: Request, res: Response) => {
+router.post('/all-events', async (req: Request, res: Response) => {
 
   // create object
    const event: CampaignEvent = req.body;
@@ -25,14 +25,15 @@ router.post('/', async (req: Request, res: Response) => {
   res.status(200).json({ message: 'Event added to Redis queue' });
 });
 
+
 // GET /events - return campaigns with their Counts from Mongo
-router.get('/', async (_req: Request, res: Response) => {
+router.get('/all-events', async (_req: Request, res: Response) => {
   try {
 
     // connect to Mongo
 
     const db = await connectToMongo();
-    const collection = db.collection('campaign_stats');
+    const collection = db.collection('all_events');
 
     // fetch all from campaign_stats collection
     const campaigns = await collection.find().toArray();
