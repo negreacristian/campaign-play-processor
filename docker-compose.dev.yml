@@ -7,6 +7,7 @@ services:
       - "3000:3000"
     volumes:
       - ./backend:/app
+      - /app/node_modules
     command: npm run dev
     env_file:
       - ./backend/.env.dev
@@ -20,6 +21,7 @@ services:
       - "5173:5173"
     volumes:
       - ./frontend:/app
+      - /app/node_modules
     command: npm run dev
     depends_on:
       - backend
