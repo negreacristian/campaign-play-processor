@@ -2,8 +2,7 @@ import { Worker } from 'bullmq';
 import { CampaignEvent } from '../types/campaignEvent';
 import { connectToMongo } from '../db/mongo';
 import { config } from '../config/env';
-import { timeStamp } from 'console';
-import { Timestamp } from 'mongodb';
+
 
 // create a worker to listen for events in the queue
 const worker = new Worker<CampaignEvent>( 'play-events', async job => {
