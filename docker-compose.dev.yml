@@ -1,0 +1,35 @@
+version: '3.9'
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./backend:/app
+    command: npm run dev
+    env_file:
+      - ./backend/.env.dev
+    depends_on:
+      - redis
+      - mongo
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+    command: npm run dev
+    depends_on:
+      - backend
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
