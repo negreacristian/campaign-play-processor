@@ -7,7 +7,7 @@ import { Campaign } from '../types/campaign';
 export const fetchCampaigns = async (): Promise<Campaign[]> => {
   
   // GET request to the backend api 
-  const res = await fetch('http://localhost:3000/events');
+  const res = await fetch('http://localhost:3000/all-events');
 
   // if res not ok then error
   if (!res.ok) {
