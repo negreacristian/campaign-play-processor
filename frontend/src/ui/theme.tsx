@@ -33,7 +33,28 @@ const theme = createTheme({
     subtitle2: { letterSpacing: 0.2 },
     button: { fontWeight: 800, fontSize: '0.95rem' }, 
   },
-
+  components: {
+    MuiContainer: {
+      defaultProps: {
+        maxWidth: false,        // maxiwidth remove
+        disableGutters: true,
+      },
+      styleOverrides: {
+        root: {
+          maxWidth: 'none',     
+          // brute force
+          '@media (min-width:600px)':  { maxWidth: 'none' },
+          '@media (min-width:900px)':  { maxWidth: 'none' },
+          '@media (min-width:1200px)': { maxWidth: 'none' },
+          '@media (min-width:1536px)': { maxWidth: 'none' },
+          //for all classes
+          '&.MuiContainer-maxWidthXs, &.MuiContainer-maxWidthSm, &.MuiContainer-maxWidthMd, &.MuiContainer-maxWidthLg, &.MuiContainer-maxWidthXl': {
+            maxWidth: 'none',
+          },
+        },
+      },
+    },
+  },
   
 });
 
