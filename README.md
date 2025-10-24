@@ -137,6 +137,13 @@ When running locally without Docker, ensure `REDIS_HOST=localhost` and `MONGO_UR
   1. Submit a POST request and confirm the worker logs the ingestion.
   2. Run `GET /all-events` to verify Mongo persistence.
   3. Ensure the dashboard updates within 10 seconds and the chart matches the totals.
+- Manual Event Ingestion (API Test) : You can simulate a single user event by sending a POST request directly to the backend API.
+
+```bash
+curl -X POST http://localhost:3000/events \
+    -H "Content-Type: application/json" \
+    -d '{"screen_id": "screen-102", "campaign_id": "cmp-2025-123", "timestamp": "2025-10-16T09:21:13Z"}'
+  ```
 
 ## Troubleshooting
 - **No events in dashboard**: Verify the backend container logs; ensure Redis and Mongo are reachable (`REDIS_HOST`, `MONGO_URI`).
