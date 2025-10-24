@@ -140,7 +140,7 @@ When running locally without Docker, ensure `REDIS_HOST=localhost` and `MONGO_UR
 - Manual Event Ingestion (API Test) : You can simulate a single user event by sending a POST request directly to the backend API.
 
 ```bash
-curl -X POST http://localhost:3000/events \
+curl -X POST http://localhost:3000/all-events \
     -H "Content-Type: application/json" \
     -d '{"screen_id": "screen-102", "campaign_id": "cmp-2025-123", "timestamp": "2025-10-16T09:21:13Z"}'
   ```
